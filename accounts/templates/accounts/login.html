@@ -1,0 +1,100 @@
+{%extends 'accounts/base.html'%}
+{%block content%}
+    <div class="container mt-5">
+        <div class="shadow-lg p-5 mb-5 bg-body-tertiary rounded-5 pt-5" id="bg">
+        <p class="text-center text-light fw-bold fs-3"><img src="https://cdn-icons-png.flaticon.com/128/2331/2331970.png" style="width: 40px;"> ShopLocal-Hub</p>
+         <p class="fs-1 text-center pt-5"><span class="fw-bold">Welcome</span>  Back!</p>
+         <div id="msg"></div>
+         <form id="loginForm">
+        <div class="row">
+            <div class="col-12 mb-3">
+                <input type="text" name="username" id="username" class="form-control" placeholder="Username">
+            </div>
+              <div class="col-12 mb-3">
+                <input type="password" name="password" id="password" class="form-control" placeholder="password">
+              </div>
+              <div class="col-12 mb-3">
+                <button type="submit" class="btn btn-large text-light fw-bold rounded" style="background-image: url('https://wallpaperaccess.com/full/1732235.jpg');width:100%;">Login</button>
+              </div>
+              <div class="col-12 text-center">
+                <p>New user? <a href="{%url 'accounts:register_page' %}" style="color: rgb(79, 116, 159);" class="fw-bold" >Sign Up</a></p>
+              </div>
+        </div>
+         </form>
+        </div>
+    </div>
+{%endblock%}
+{%block scripts%}
+<script>
+    
+
+
+const form = document.getElementById('loginForm');
+const msg  = document.getElementById('msg');
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  msg.textContent = '';
+  msg.className   = ' <button type="submit"  style="width: 100%;" class="btn btn-outline-primary disabled">Login</button>'
+  
+  const username = document.getElementById('username').value.trim();
+  const password = document.getElementById('password').value;
+  if(username==''&&password==''){
+    const btn=document.getElementById('login')
+    btn='';
+    btn=``
+  }
+  
+  if (!username || !password) {
+    msg.textContent = 'Username and password are required.';
+    msg.className   = 'error';
+    return;
+  }
+
+  try {
+    const res = await fetch('/api/login/', {
+      method: 'POST',
+      
+      headers: {
+        'Content-Type': 'application/json',
+         
+      },
+      
+      body: JSON.stringify({username,password})
+     
+
+    });
+
+       const data = await res.json();
+
+    
+
+    if (!res.ok) {
+      
+      msg.innerHTML =   `<p class="alert alert-danger" role="alert">${data.detail} || Login failed. Please check credentials.</p>`;
+      
+      return;
+    }
+  
+
+   
+
+
+    
+    const accessToken  = data.access;
+    const refreshToken = data.refresh;
+    
+    localStorage.setItem('accessToken', accessToken);
+    localStorage.setItem('refreshToken', refreshToken);
+    console.log(data.username)
+    console.log(localStorage.getItem('accessToken'))
+    if (res.ok && data.access) {
+    window.location.href = '/register/';
+    }
+  } catch (err) {
+    console.error('Login fetch error:', err);
+     msg.innerHTML = '<p class="alert alert-danger" role="alert">An error occurred. Try again later</p>';
+  }
+});
+</script>
+{%endblock scripts%}

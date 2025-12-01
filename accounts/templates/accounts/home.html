@@ -1,0 +1,21 @@
+{% extends 'accounts/base.html'%}
+{%block content%}
+<div class="container-fluid mt-5">
+    <div class="text-end pe-3 "><a href="" class="btn btn-larger rounded text-light fw-bold fs-4" style="background-image: url('https://wallpaperaccess.com/full/1732235.jpg');"><img src="https://cdn-icons-png.flaticon.com/128/10473/10473299.png" style="width: 20px;"> Home</a></div>
+</div>
+    <div class="container mt-5">
+        <div class="shadow-lg p-5 mb-5 bg-body-tertiary rounded-5 pt-5" id="bg">
+        <p class="text-center text-light fw-bold fs-3"><img src="https://cdn-icons-png.flaticon.com/128/2331/2331970.png" style="width: 40px;"> ShopLocal-Hub</p>
+         <p class="fs-1 text-center pt-5"><span class=>Welcome!</span></p>
+        <div class="row">
+            <div class="col-12 mb-3">
+                <a href="{%url 'accounts:register_page'%}" class="btn btn-large text-light fw-bold rounded" style="background-image: url('https://wallpaperaccess.com/full/1732235.jpg');width:100%;">Create Account</a>
+              </div>
+              <div class="col-12 mb-3">
+                <a href="{%url 'accounts:login_page'%}" class="btn btn-large fw-bold bg-light rounded" style="width:100%; color: rgb(99, 121, 202);">Login</a>
+              </div>
+              
+        </div>
+        </div>
+    </div>
+{%endblock%}

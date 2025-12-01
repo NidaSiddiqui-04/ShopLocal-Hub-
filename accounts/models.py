@@ -11,4 +11,4 @@ class CustomUser(AbstractUser):
     address=models.CharField(max_length=200,null=True,blank=True)
 
     def __str__(self):
-        return self.username - {(self.phone_number)}
+        return f"{self.username}-({self.phone_number}) "

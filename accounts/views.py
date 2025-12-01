@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework import viewsets
+from django.views.generic.base import TemplateView
 from rest_framework.permissions import AllowAny,IsAuthenticated
 from .serializers import RegisterSerializer,UserProfileSerializer
 from django.contrib.auth import get_user_model
@@ -20,3 +21,14 @@ class ProfileView(viewsets.ModelViewSet):
 
     def get_object(self):
         return self.request.user
+
+
+class HomePage(TemplateView):
+    template_name="accounts/home.html"
+
+class RegisterPage(TemplateView):
+    template_name="accounts/register.html"
+    parser_classes= "multipart/form-data"
+
+class LoginPage(TemplateView):
+    template_name="accounts/login.html"

@@ -1,0 +1,12 @@
+body{
+    background-image: url("https://wallpaperaccess.com/full/1732235.jpg");
+}
+
+.container{
+    width: 25rem;
+    
+}
+
+#bg{
+    background-image: url('https://wallpaperaccess.com/full/1732235.jpg');
+}
