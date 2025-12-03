@@ -10,7 +10,7 @@ class ItemsForSale(models.Model):
     title =models.CharField(max_length=200)
     description =models.TextField(null=True,blank=True)
     price=models.PositiveIntegerField()
-    category=models.CharField(choices=CATEGORY_CHOICES,default=None)
+    category=models.CharField(choices=CATEGORY_CHOICES,default="none")
     condition=models.CharField(choices=CONDITION_CHOICES,default="Good")
     user=models.ForeignKey(settings.AUTH_USER_MODEL , on_delete=models.CASCADE,related_name="items")
     created_at=models.DateTimeField(auto_now_add=True)
@@ -30,9 +30,9 @@ class ItemImage(models.Model):
         on_delete=models.CASCADE,
         related_name="images"
     )
-    image = models.ImageField(upload_to='media')
+    image = models.ImageField(upload_to='media',default="media.png")
     # optionally, you can add a caption or order:
-    caption = models.CharField(max_length=200, blank=True)
+    caption = models.CharField(max_length=200, blank=True,null=True)
     uploaded_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
