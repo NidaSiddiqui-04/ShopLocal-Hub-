@@ -4,5 +4,12 @@ from .views import *
 from django.contrib.auth import views as a_views
 
 urlpatterns=[
-    path('create_post/',PostItem.as_view(),name="create_post"),
+    # path('post/',post_item),
+    # path('post/<int:pk>/',post_item),
+     path('post/',PostItem.as_view()),
+     path('post/<int:pk>',PostItem.as_view()),
+     path('api/dashboard/',Dashboard.as_view(),name="Dashboard_api"),
+     path('dashboard/',DashboardView.as_view(),name="dashboard")
+
+
 ]

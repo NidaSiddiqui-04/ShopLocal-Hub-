@@ -16,29 +16,11 @@ class ItemsForSale(models.Model):
     user=models.ForeignKey(settings.AUTH_USER_MODEL , on_delete=models.CASCADE,related_name="items")
     created_at=models.DateTimeField(auto_now_add=True)
     status=models.CharField(choices=STATUS_CHOICES,default="Available")
-    
+    image = models.ImageField(upload_to='products',default="media.png")
+
 
 
     def __str__(self):
         return f"{self.title}-{(self.user.username)}"
 
 
-
-
-class ItemImage(models.Model):
-    item = models.ForeignKey(
-        ItemsForSale,
-        on_delete=models.CASCADE,
-        related_name="images"
-    )
-    image = models.ImageField(upload_to='media',default="media.png")
-    caption = models.CharField(max_length=200, blank=True,null=True)
-    uploaded_at = models.DateTimeField(auto_now_add=True)
-    
-
-    def clean(self):
-        if self.item.images.count() >= 5:
-            raise ValidationError("Cannot have more than 5 images per item.")
-        
-    def __str__(self):
-        return f"Image for {self.item.title}"

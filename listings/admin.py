@@ -1,5 +1,4 @@
 from django.contrib import admin
-from .models import ItemImage,ItemsForSale
+from .models import ItemsForSale
 # Register your models here.
 admin.site.register(ItemsForSale)
-admin.site.register(ItemImage)
